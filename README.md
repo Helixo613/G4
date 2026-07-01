@@ -1,6 +1,9 @@
 # G4
+
 Basic public collaboration repo setup.
 
-Harshith Test!
-Team : 
+Team:
 1. Kirissh
+2. Arnav
+3. Harshith
+4. Shanmukh
