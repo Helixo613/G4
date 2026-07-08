@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ArchitectureSlide } from "./components/ArchitectureSlide.jsx";
 import { AttentionSlide } from "./components/AttentionSlide.jsx";
+import { LiveDemoSlide } from "./components/LiveDemoSlide.jsx";
 import { ProblemSlide } from "./components/ProblemSlide.jsx";
 import { ResultsSlide } from "./components/ResultsSlide.jsx";
 import { TitleSlide } from "./components/TitleSlide.jsx";
 import "./styles.css";
 
-const SLIDES = [TitleSlide, ProblemSlide, AttentionSlide, ArchitectureSlide, ResultsSlide];
-const PRESENTERS = ["P1", "P1", "P2", "P3", "P4"];
+const SLIDES = [TitleSlide, ProblemSlide, AttentionSlide, ArchitectureSlide, ResultsSlide, LiveDemoSlide];
+const PRESENTERS = ["P1", "P1", "P2", "P3", "P4", "BONUS"];
 
 function App() {
   const [slide, setSlide] = useState(0);
@@ -27,7 +28,7 @@ function App() {
     const onKey = (event) => {
       if (["ArrowRight", "PageDown", " "].includes(event.key)) go(slide + 1);
       if (["ArrowLeft", "PageUp"].includes(event.key)) go(slide - 1);
-      if (/^[1-5]$/.test(event.key)) go(Number(event.key) - 1);
+      if (/^[1-6]$/.test(event.key)) go(Number(event.key) - 1);
       if (event.key === "f" || event.key === "F") toggleFullscreen();
     };
     window.addEventListener("keydown", onKey);

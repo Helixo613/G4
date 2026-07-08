@@ -171,6 +171,27 @@
 
 ---
 
+## BONUS — Live Model Demo (Q&A only, Slide 6)
+
+> Not part of the timed 12 minutes — only pull this up if there's time left or someone asks "does this actually work, for real, right now?"
+
+### [SLIDE 6 — Live Model Demo]
+
+> Everything so far was a *toy* — small hand-picked numbers so the mechanism is easy to see. This last slide is not a toy. It's a real 6-layer, 12-head Transformer encoder (a MiniLM, in the BERT family) running **live in your browser**, computing genuine learned attention weights on whatever sentence you type.
+>
+> **[CLICK: type a sentence — reuse "The animal didn't cross the street because it was too tired," or take one from the audience]**
+>
+> **[CLICK: "Run real model" — one-time ~91MB download the first time, then instant on every re-run]**
+>
+> **[CLICK: layer buttons L1–L6, then the head dropdown — click different tokens to move the focus]**
+>
+> Same arcs, same heatmap you saw on Slide 3 — except now it's not us choosing the numbers. Every layer and every head looks a little different because each one really did learn something different during training, exactly like [Person 3] described. If a real sentence from the audience produces messy or surprising arcs, that's honest — real attention is noisier than our clean teaching example, and that's worth saying out loud.
+
+**[HANDOFF]**
+> That's the whole talk — from "why not RNNs" to the actual weights inside a real network, live, on your words. Happy to keep taking questions.
+
+---
+
 ## Quick-reference: cue sheet
 
 | # | Speaker | Slide | Interactions in order |
@@ -179,6 +200,7 @@
 | 2 | Person 2 | 3 | Click "it" → toggle tired/wide → Show the math |
 | 3 | Person 3 | 4 | Head 1 → Head 2 → Positional Encoding tab → Full Architecture tab → Mask toggle |
 | 4 | Person 4 | 5 | Show results → Training cost → Legacy timeline |
+| Bonus | Any / Q&A | 6 | Type sentence → Run real model → switch layers/heads → click tokens |
 
 ## Rehearsal notes
 
@@ -186,3 +208,4 @@
 - Whoever drives the laptop: advance slides only on `[SLIDE N]` cues; presenters can drive their own interactions or nominate one driver.
 - If running long, the cuttable lines are: Person 1's opening hands-poll, Person 3's second head demo, Person 4's AlphaFold bullet.
 - If asked "why √d_k" or "how are Q/K/V learned" in Q&A: they're linear projections (learned weight matrices) applied to each word's embedding; scaling keeps dot products in softmax's sensitive range.
+- Slide 6 (live model demo) needs internet the first time it runs (~91MB one-time model download); only pull it up in Q&A, never during the timed 12 minutes. If offline or the download fails, skip it — slides 1–5 don't depend on it.

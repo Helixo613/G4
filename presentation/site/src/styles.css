@@ -278,6 +278,59 @@ td { border-bottom: 1px solid var(--line); padding: 0.68rem 0.2rem; }
 }
 .closing-line { margin-top: 1.6rem; color: var(--mint); font-size: 1.6rem; opacity: 0; animation: rise 0.5s ease both; animation-delay: 1.9s; }
 
+/* ---------- Slide 6 — Live Model Demo ---------- */
+/* Flex-column shell so the grid always fits between the caption and the
+ * footer -- no overflow into the deck controls. */
+.live-slide .slide-content { display: flex; flex-direction: column; min-height: 0; }
+.live-slide .slide-header { margin-bottom: 0.6rem; }
+.live-slide h2 { font-size: 1.85rem; max-width: 34ch; }
+
+.live-input-row { display: flex; gap: 0.7rem; margin-top: 0.2rem; max-width: 46rem; }
+.live-text-input {
+  flex: 1; font: inherit; color: var(--text); background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.55rem 1.1rem;
+}
+.live-text-input:focus { outline: none; border-color: var(--amber); }
+.live-caption { max-width: 60rem; margin: 0.5rem 0 0; font-size: 0.78rem; }
+.live-real-note { margin: 0.6rem 0 0; color: var(--amber); }
+
+.live-status {
+  margin-top: 1.4rem; padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 0.9rem;
+  max-width: 34rem;
+}
+.spinner {
+  width: 1.4rem; height: 1.4rem; border-radius: 50%; flex: none;
+  border: 3px solid rgba(255, 189, 89, 0.25); border-top-color: var(--amber);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.live-error p:first-child { color: var(--danger); }
+
+/* Grid fills the leftover vertical space; both columns clip internally. */
+.live-grid { flex: 1; min-height: 0; margin-top: 0.9rem; align-items: stretch; }
+.live-grid .stage {
+  display: flex; flex-direction: column; min-height: 0; gap: 0.2rem;
+  padding: 1rem 1.15rem 0.9rem;
+}
+/* Token labels: smaller + clipped so dense sentences (12-16 tokens) don't
+ * collide into each other ("suitcasebecause"). */
+.live-grid .token-buttons { flex: none; height: 2.4rem; }
+.live-grid .token-pill {
+  font-size: 0.6rem; padding: 0.3rem 0.3rem; max-width: 5.2rem;
+  overflow: hidden; text-overflow: ellipsis;
+}
+/* Arcs take the remaining height instead of a fixed 14rem that overflowed. */
+.live-grid .attention-arcs { flex: 1; min-height: 6rem; height: auto; margin: 0; }
+.live-controls { flex: none; justify-content: space-between; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.4rem; }
+.layer-buttons { display: flex; gap: 0.4rem; }
+.layer-buttons .pill-btn { padding: 0.38rem 0.7rem; font-size: 0.74rem; }
+.head-select {
+  font: inherit; color: var(--text); background: var(--panel-solid);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.42rem 0.9rem; cursor: pointer;
+}
+/* Keep the heatmap square vertically centered within the stretched row. */
+.live-grid .heatmap-wrap { align-self: center; }
+
 @media (max-width: 1100px) {
   :root { font-size: 17px; }
   .slide { padding: 2.6rem 1rem 4.2rem; overflow: auto; }

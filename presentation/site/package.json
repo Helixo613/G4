@@ -5,11 +5,14 @@
     "test": "node tests/validate-attention-data.mjs"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "vite": "latest"
   },
-  "devDependencies": {},
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
 }
