@@ -22,7 +22,8 @@ export function AttentionSlide() {
         <div className="sim-grid">
           <div className="stage glass-panel">
             <TokenRow tokens={tokens} focus={focus} onFocus={setFocus} />
-            <div className="control-row">
+            <AttentionArcs weights={data.weights[focus]} focus={focus} tokens={tokens} />
+            <div className="control-row stage-controls">
               <button className="pill-btn" onClick={() => setVariant(variant === "tired" ? "wide" : "tired")}>
                 {variant === "tired" ? "tired \u2192 wide" : "wide \u2192 tired"}
               </button>
@@ -30,7 +31,6 @@ export function AttentionSlide() {
                 Show the math
               </button>
             </div>
-            <AttentionArcs weights={data.weights[focus]} focus={focus} tokens={tokens} />
           </div>
           <Heatmap matrix={data.weights} focus={focus} tokens={tokens} />
         </div>

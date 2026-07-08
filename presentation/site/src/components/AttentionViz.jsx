@@ -1,14 +1,28 @@
 import { quadPath } from "../sim/motion.js";
 
+// Shared horizontal mapping so token labels and arc nodes land on the exact
+// same fraction of the container width. INSET keeps the first/last node off
+// the extreme edges so nothing clips. Returned as a 0-100 percentage; the arc
+// SVG scales it into its 0-1000 viewBox with nodeViewX().
+const NODE_INSET = 4;
+export function nodeLeft(index, n) {
+  if (n <= 1) return 50;
+  return NODE_INSET + (index / (n - 1)) * (100 - 2 * NODE_INSET);
+}
+const nodeViewX = (index, n) => nodeLeft(index, n) * 10;
+
 /** Clickable token row shared by the self-attention simulator and the
- * attention-heads tab. */
+ * attention-heads tab. Tokens are absolutely positioned and centered over
+ * their matching arc node via the shared nodeLeft() mapping. */
 export function TokenRow({ tokens, focus, onFocus }) {
+  const n = tokens.length;
   return (
     <div className="token-buttons">
       {tokens.map((token, index) => (
         <button
           key={`${token}-${index}`}
           className={`token-pill ${focus === index ? "selected" : ""}`}
+          style={{ left: `${nodeLeft(index, n)}%` }}
           onClick={onFocus ? () => onFocus(index) : undefined}
         >
           {token}
@@ -24,7 +38,6 @@ export function TokenRow({ tokens, focus, onFocus }) {
  * stroke keeps flowing continuously so the arcs never look static. */
 export function AttentionArcs({ weights, focus, tokens, height = 230 }) {
   const n = tokens.length;
-  const step = 1000 / (n - 1);
   const baseline = 26;
   return (
     <svg className="attention-arcs" viewBox={`0 0 1000 ${height}`} preserveAspectRatio="none">
@@ -37,8 +50,8 @@ export function AttentionArcs({ weights, focus, tokens, height = 230 }) {
       </defs>
       {weights.map((weight, index) => {
         if (index === focus) return null;
-        const x1 = focus * step;
-        const x2 = index * step;
+        const x1 = nodeViewX(focus, n);
+        const x2 = nodeViewX(index, n);
         const bow = 60 + Math.abs(index - focus) * 12;
         const cx = (x1 + x2) / 2;
         const cy = baseline + bow;
@@ -52,9 +65,9 @@ export function AttentionArcs({ weights, focus, tokens, height = 230 }) {
       })}
       {weights.map((weight, index) => {
         if (index === focus) return null;
-        return <circle key={`d-${index}`} className="arc-end" cx={index * step} cy={baseline} r={2.5 + weight * 6} />;
+        return <circle key={`d-${index}`} className="arc-end" cx={nodeViewX(index, n)} cy={baseline} r={2.5 + weight * 6} />;
       })}
-      <circle className="arc-source" cx={focus * step} cy={baseline} r="6" />
+      <circle className="arc-source" cx={nodeViewX(focus, n)} cy={baseline} r="6" />
     </svg>
   );
 }

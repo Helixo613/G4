@@ -152,12 +152,16 @@ h3 { font-size: 0.98rem; margin-bottom: 0.6rem; color: var(--muted); font-weight
 .panel-head { display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; }
 .control-row, .head-buttons, .tabs, .results-actions { display: flex; gap: 0.6rem; align-items: center; }
 
-.tokens, .token-buttons { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; margin: 1.1rem 0; position: relative; z-index: 2; }
-.tokens span, .token-buttons button {
+.tokens { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; margin: 1.1rem 0; position: relative; z-index: 2; }
+.tokens span {
   min-width: 3.4rem; text-align: center; background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 9px; padding: 0.55rem 0.5rem;
   color: var(--text); cursor: default; transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
+
+/* Aligned token row: each label centered over its matching arc node via the
+ * shared nodeLeft() percentage set inline on the button. */
+.token-buttons { position: relative; height: 2.9rem; margin: 0.4rem 0 0.2rem; z-index: 2; }
 .tokens.sequential span.lit { background: rgba(95, 184, 255, 0.3); border-color: var(--blue); color: #fff; transform: translateY(-2px); }
 .tokens.burst span.lit { background: rgba(87, 240, 194, 0.26); border-color: var(--mint); color: #fff; transform: translateY(-2px); }
 .tokens.dim span { opacity: 0.4; }
@@ -183,12 +187,15 @@ h3 { font-size: 0.98rem; margin-bottom: 0.6rem; color: var(--muted); font-weight
 .stage { position: relative; min-height: 20rem; padding: 1.15rem; }
 .heatmap-wrap .heatmap { max-width: 15rem; margin-inline: auto; }
 .token-pill {
-  border: 1px solid var(--line); background: rgba(255, 255, 255, 0.05); border-radius: 10px;
-  padding: 0.58rem 0.6rem; color: var(--text); cursor: pointer; transition: all 0.2s ease;
+  position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap;
+  border: 1px solid var(--line); background: rgba(255, 255, 255, 0.05); border-radius: 9px;
+  padding: 0.42rem 0.42rem; font-size: 0.72rem; line-height: 1; color: var(--text); cursor: pointer;
+  transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 .token-pill:hover { border-color: var(--blue); }
 .token-pill.selected { background: rgba(87, 240, 194, 0.22); border-color: var(--mint); color: #fff; box-shadow: 0 0 18px rgba(87, 240, 194, 0.3); }
-.attention-arcs { position: relative; display: block; width: 100%; height: 14rem; margin-top: 0.6rem; pointer-events: none; overflow: visible; }
+.attention-arcs { position: relative; display: block; width: 100%; height: 14rem; margin-top: 0.2rem; pointer-events: none; overflow: visible; }
+.stage-controls { margin-top: 0.9rem; justify-content: center; }
 .attention-arcs path { fill: none; stroke: url(#arcGradient); transition: stroke-width 0.4s ease, opacity 0.4s ease; }
 .attention-arcs .arc-source { fill: #eafff6; filter: drop-shadow(0 0 8px var(--mint)); }
 .attention-arcs .arc-end { fill: var(--blue); opacity: 0.7; }
